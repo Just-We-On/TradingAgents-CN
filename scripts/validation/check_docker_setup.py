@@ -125,18 +125,13 @@ def check_env_file():
                 continue
             
             # Check if key has a value after '='
-            try:
-                key_pattern = f'{key}='
-                if key_pattern in content:
-                    parts = content.split(key_pattern)
-                    if len(parts) > 1:
-                        value = parts[1].split('\n')[0].strip()
-                        if not value or value.startswith('#'):
-                            missing_keys.append(key)
-                    else:
+            key_pattern = f'{key}='
+            if key_pattern in content:
+                parts = content.split(key_pattern, 1)  # Split only once
+                if len(parts) > 1:
+                    value = parts[1].split('\n')[0].strip()
+                    if not value or value.startswith('#'):
                         missing_keys.append(key)
-            except (IndexError, AttributeError):
-                missing_keys.append(key)
         
         if missing_keys:
             print(f"   ⚠️  以下配置项未设置或为空: {', '.join(missing_keys)}")
