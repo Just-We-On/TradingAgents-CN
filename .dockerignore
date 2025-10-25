@@ -1,0 +1,62 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python cache
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+*.whl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment (keep .env.example, exclude local overrides)
+.env.local
+.env.*.local
+.env.db
+.env.mongodb*
+
+# Data directories (will be mounted as volumes)
+data/
+data_backup_*/
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs (will be mounted as volume)
+logs/
+*.log
+
+# CI/CD
+.github/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache
+bash.exe.stackdump
