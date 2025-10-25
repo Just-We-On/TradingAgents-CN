@@ -119,7 +119,23 @@ def check_env_file():
         
         missing_keys = []
         for key in required_keys:
-            if key not in content or f'{key}=' in content and content.split(f'{key}=')[1].split('\n')[0].strip() == '':
+            # Check if key exists in content
+            if key not in content:
+                missing_keys.append(key)
+                continue
+            
+            # Check if key has a value after '='
+            try:
+                key_pattern = f'{key}='
+                if key_pattern in content:
+                    parts = content.split(key_pattern)
+                    if len(parts) > 1:
+                        value = parts[1].split('\n')[0].strip()
+                        if not value or value.startswith('#'):
+                            missing_keys.append(key)
+                    else:
+                        missing_keys.append(key)
+            except (IndexError, AttributeError):
                 missing_keys.append(key)
         
         if missing_keys:
